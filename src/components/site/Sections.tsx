@@ -18,7 +18,7 @@ export function About() {
     [50, "عميل", "Clients"],
     [2, "استوديو إنتاج", "Production studios"],
   ];
-  const values = [["الوطنية", "Patriotism"], ["المصداقية", "Credibility"], ["الابتكار", "Innovation"], ["المرونة", "Flexibility"], ["التكامل", "Integration"]];
+  const values: [string, string][] = [["الوطنية", "Patriotism"], ["المصداقية", "Credibility"], ["الابتكار", "Innovation"], ["المرونة", "Flexibility"], ["التكامل", "Integration"]];
   return (
     <section id="about" className={sec}>
       <div className={wrap}>
@@ -35,7 +35,7 @@ export function About() {
               <div className="mt-2 text-muted-foreground">{t(a, e)}</div>
             </Reveal>
           ))}
-          <Reveal delay={0.2} className="glass rounded-3xl p-7 md:col-span-2">
+          <Reveal delay={0.2} className="glass rounded-3xl p-7 text-sm">
             <p className="text-muted-foreground">
               {t(
                 "نعمل وفق أسس ومعايير فنية عالية، جمعنا حب العمل والشغف والإبداع لنقدم مثالاً يحتذى به للجودة والاحترافية.",
@@ -45,10 +45,10 @@ export function About() {
           </Reveal>
         </div>
         <div className="mt-4 grid gap-4 md:grid-cols-3">
-          {[
+          {([
             ["رؤيتنا", "Our vision", "أن نكون الشركة السعودية الأفضل لصناعة الرسوم المتحركة والميديا على مستوى المنطقة.", "To be the best Saudi company for animation and media in the region."],
             ["رسالتنا", "Our message", "نصنع الفكرة وننفذها بأعلى المواصفات الفنية بتقنية عالمية وبروح هويتنا المحلية.", "We create the idea and deliver it to the highest technical specifications, with international technology and the spirit of our local identity."],
-          ].map(([a, e, da, de], i) => (
+          ] as [string, string, string, string][]).map(([a, e, da, de], i) => (
             <Reveal key={e} delay={i * 0.1} className="group rounded-3xl border border-border p-8 transition hover:border-primary">
               <h3 className="mb-3 text-xl font-semibold text-primary">{t(a, e)}</h3>
               <p className="text-muted-foreground">{t(da, de)}</p>
@@ -70,7 +70,7 @@ export function About() {
 
 export function Founder() {
   const { t } = useLang();
-  const tags = [["إخراج", "Directing"], ["تصميم شخصيات", "Character design"], ["دبلجة وأداء صوتي", "Voice acting"], ["رسوم 3D", "3D animation"]];
+  const tags: [string, string][] = [["إخراج", "Directing"], ["تصميم شخصيات", "Character design"], ["دبلجة وأداء صوتي", "Voice acting"], ["رسوم 3D", "3D animation"]];
   return (
     <section className={sec}>
       <div className={`${wrap} grid items-center gap-14 md:grid-cols-[auto_1fr]`}>
@@ -110,7 +110,7 @@ export function How() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 80%", "end 50%"] });
   const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const steps = [["نخلق الفكرة", "Create the idea"], ["نرسم الخطة", "Draw the plan"], ["نبدأ التنفيذ", "Start implementation"], ["نحقق الهدف", "Achieve the goal"]];
+  const steps: [string, string][] = [["نخلق الفكرة", "Create the idea"], ["نرسم الخطة", "Draw the plan"], ["نبدأ التنفيذ", "Start implementation"], ["نحقق الهدف", "Achieve the goal"]];
   return (
     <section className={sec}>
       <div className={wrap} ref={ref}>
@@ -177,7 +177,7 @@ export function Services() {
 
 export function Work() {
   const { t } = useLang();
-  const filters = [["الكل", "All"], ["2D", "2D"], ["3D", "3D"], ["إعلانات", "Ads"], ["موشن", "Motion"], ["شخصيات", "Characters"]];
+  const filters: [string, string][] = [["الكل", "All"], ["2D", "2D"], ["3D", "3D"], ["إعلانات", "Ads"], ["موشن", "Motion"], ["شخصيات", "Characters"]];
   const [f, setF] = useState("All");
   const projects = [
     { n: 1, cat: "3D", pos: "object-left-top" },
