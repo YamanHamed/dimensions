@@ -19,21 +19,25 @@ export function Reveal({ children, delay = 0, className }: { children: ReactNode
 
 export function SplitWords({ text, className, delay = 0 }: { text: string; className?: string; delay?: number }) {
   return (
-    <span className={className}>
+    <motion.span
+      className={className}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ staggerChildren: 0.08, delayChildren: delay }}
+    >
       {text.split(" ").map((w, i) => (
-        <span key={w + i} className="inline-block overflow-hidden pb-[0.12em] align-bottom">
+        <span key={w + i} className="inline-block overflow-hidden pb-[0.15em] align-bottom">
           <motion.span
             className="inline-block"
-            initial={{ y: "110%" }}
-            whileInView={{ y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9, delay: delay + i * 0.08, ease }}
+            variants={{ hidden: { y: "110%" }, show: { y: 0 } }}
+            transition={{ duration: 0.9, ease }}
           >
             {w}&nbsp;
           </motion.span>
         </span>
       ))}
-    </span>
+    </motion.span>
   );
 }
 
