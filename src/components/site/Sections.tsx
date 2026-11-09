@@ -35,7 +35,7 @@ export function About() {
               <div className="mt-2 text-muted-foreground">{t(a, e)}</div>
             </Reveal>
           ))}
-          <Reveal delay={0.2} className="glass rounded-3xl p-7 md:col-span-2">
+          <Reveal delay={0.2} className="glass rounded-3xl p-7 text-sm">
             <p className="text-muted-foreground">
               {t(
                 "نعمل وفق أسس ومعايير فنية عالية، جمعنا حب العمل والشغف والإبداع لنقدم مثالاً يحتذى به للجودة والاحترافية.",
