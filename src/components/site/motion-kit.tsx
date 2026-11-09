@@ -20,7 +20,6 @@ export function Reveal({ children, delay = 0, className }: { children: ReactNode
 export function SplitWords({ text, className, delay = 0 }: { text: string; className?: string; delay?: number }) {
   return (
     <motion.span
-      className={className}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.2 }}
@@ -29,7 +28,7 @@ export function SplitWords({ text, className, delay = 0 }: { text: string; class
       {text.split(" ").map((w, i) => (
         <span key={w + i} className="inline-block overflow-hidden pb-[0.15em] align-bottom">
           <motion.span
-            className="inline-block"
+            className={`inline-block ${className ?? ""}`}
             variants={{ hidden: { y: "110%" }, show: { y: 0 } }}
             transition={{ duration: 0.9, ease }}
           >
