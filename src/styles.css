@@ -143,6 +143,7 @@ body { font-family: var(--font-sans); overflow-x: hidden; }
   border: 1px solid var(--border);
 }
 @utility shadow-glow { box-shadow: var(--shadow-glow); }
+@utility shadow-sheet { box-shadow: 0 -30px 60px -20px oklch(0 0 0 / 60%), 0 -1px 0 0 var(--border); }
 @utility shadow-glow-pink { box-shadow: var(--shadow-glow-pink); }
 @utility grain {
   &::after {

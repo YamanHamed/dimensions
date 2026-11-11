@@ -29,7 +29,8 @@ function Index() {
         <Nav />
         <main className="relative">
           <Hero />
-          <About />
+          <div className="relative z-10 rounded-t-[2.5rem] bg-background shadow-sheet">
+            <About />
           <Founder />
           <How />
           <Services />
@@ -37,6 +38,7 @@ function Index() {
           <Studios />
           <Clients />
           <Contact />
+          </div>
         </main>
         <Footer />
       </div>

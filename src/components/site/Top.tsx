@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useScroll, useTransform, useMotionValueEvent } from "motion/react";
+import { AnimatePresence, motion, useScroll, useTransform, useMotionValueEvent, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpLeft, Play } from "lucide-react";
 import hero from "@/assets/hero.jpg";
@@ -86,19 +86,21 @@ export function Nav() {
 export function Hero() {
   const { t, lang } = useLang();
   const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1.05, 1.2]);
-  const fade = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const { scrollY } = useScroll();
+  const [vh, setVh] = useState(800);
+  useEffect(() => setVh(window.innerHeight), []);
+  const reduce = useReducedMotion();
+  const scale = useTransform(scrollY, [0, vh], reduce ? [1, 1] : [1, 0.92]);
+  const fade = useTransform(scrollY, [0, vh * 0.7], [1, 0]);
+  const dark = useTransform(scrollY, [0, vh], reduce ? [0, 0] : [0, 0.6]);
   return (
-    <section id="top" ref={ref} className="relative flex min-h-svh items-end overflow-hidden px-5 pb-20 pt-32 sm:px-10">
+    <motion.section id="top" ref={ref} style={{ scale }} className="sticky top-0 z-0 flex h-svh items-end overflow-hidden px-5 pb-20 pt-32 sm:px-10">
       <motion.img
         src={hero}
         alt=""
         width={1600}
         height={1008}
-        style={{ y, scale }}
-        className={`absolute inset-0 h-full w-full object-cover ${lang === "ar" ? "-scale-x-100" : ""}`}
+                className={`absolute inset-0 h-full w-full object-cover ${lang === "ar" ? "-scale-x-100" : ""}`}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
       <motion.div style={{ opacity: fade }} className="relative z-10 mx-auto w-full max-w-6xl" key={lang}>
@@ -144,6 +146,7 @@ export function Hero() {
           </div>
         </motion.div>
       </motion.div>
-    </section>
+      <motion.div style={{ opacity: dark }} className="pointer-events-none absolute inset-0 z-20 bg-background" />
+    </motion.section>
   );
 }
