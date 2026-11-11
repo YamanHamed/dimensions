@@ -47,10 +47,10 @@ export function Nav() {
   const [small, setSmall] = useState(false);
   useMotionValueEvent(scrollY, "change", (v) => setSmall(v > 60));
   const links: [string, string, string][] = [
-    ["#about", "من نحن", "About"],
-    ["#services", "خدماتنا", "Services"],
-    ["#work", "أعمالنا", "Work"],
-    ["#contact", "تواصل معنا", "Contact"],
+    ["/#about", "من نحن", "About"],
+    ["/#services", "خدماتنا", "Services"],
+    ["/#work", "أعمالنا", "Work"],
+    ["/#contact", "تواصل معنا", "Contact"],
   ];
   return (
     <motion.header
@@ -62,7 +62,7 @@ export function Nav() {
       <nav
         className={`glass flex w-full max-w-6xl items-center justify-between gap-4 rounded-full px-5 transition-all duration-500 ${small ? "py-2" : "py-3.5"}`}
       >
-        <a href="#top"><Logo /></a>
+        <a href="/"><Logo /></a>
         <div className="hidden items-center gap-7 text-sm md:flex">
           {links.map(([h, a, e]) => (
             <a key={h} href={h} className="text-muted-foreground transition-colors hover:text-foreground">
@@ -74,7 +74,7 @@ export function Nav() {
           <button onClick={toggle} className="rounded-full border border-border px-3 py-1.5 font-display text-xs hover:border-primary">
             {lang === "ar" ? "EN" : "ع"}
           </button>
-          <a href="#contact" className="hidden rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:bg-accent hover:text-accent-foreground sm:inline-block">
+          <a href="/#contact" className="hidden rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:bg-accent hover:text-accent-foreground sm:inline-block">
             {t("ابدأ مشروعك", "Start a project")}
           </a>
         </div>

@@ -1,7 +1,8 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef, useState } from "react";
 import { Play, Mail, Phone, Instagram, Twitter, Youtube, Linkedin, ArrowUpLeft } from "lucide-react";
-import work from "@/assets/work.jpg";
+import { Link } from "@tanstack/react-router";
+import { works } from "./works";
 import photo from "@/assets/studio-photo.jpg";
 import audio from "@/assets/studio-audio.jpg";
 import { useLang } from "./i18n";
@@ -177,13 +178,7 @@ export function Services() {
 
 export function Work() {
   const { t } = useLang();
-  const filters: [string, string][] = [["الكل", "All"], ["2D", "2D"], ["3D", "3D"], ["إعلانات", "Ads"], ["موشن", "Motion"], ["شخصيات", "Characters"]];
-  const [f, setF] = useState("All");
-  const projects = [
-    { n: 1, cat: "3D", pos: "object-left-top" },
-    { n: 2, cat: "Characters", pos: "object-center" },
-    { n: 3, cat: "Motion", pos: "object-right-bottom" },
-  ].filter((p) => f === "All" || p.cat === f);
+  const projects = works.filter((w) => w.featured).slice(0, 3);
   return (
     <section id="work" className={sec}>
       <div className={wrap}>
@@ -192,36 +187,34 @@ export function Work() {
             <SectionTag n="05" label={t("أعمالنا", "Our work")} />
             <h2 className="text-[clamp(2.2rem,5vw,4rem)] font-bold"><SplitWords text={t("أعمال مختارة", "Selected work")} /></h2>
           </div>
-          <div className="flex flex-wrap gap-2">
-            {filters.map(([a, e]) => (
-              <button key={e} onClick={() => setF(e)} className={`relative rounded-full px-4 py-2 text-sm transition ${f === e ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>
-                {f === e && <motion.span layoutId="chip" className="absolute inset-0 rounded-full bg-primary" />}
-                <span className="relative">{t(a, e)}</span>
-              </button>
-            ))}
-          </div>
+          <Magnetic>
+            <Link to="/work" className="group inline-flex items-center gap-2 rounded-full glass px-6 py-3 font-medium transition hover:border-primary">
+              {t("الأرشيف الكامل", "View full archive")}
+              <ArrowUpLeft className="h-4 w-4 transition group-hover:-translate-x-1 ltr:rotate-90" />
+            </Link>
+          </Magnetic>
         </div>
-        <motion.div layout className="mt-14 grid gap-6">
-          {projects.length === 0 && <p className="py-20 text-center text-muted-foreground">{t("قريباً", "Coming soon")}</p>}
-          {projects.map((p) => (
-            <motion.a layout key={p.n} href="#contact" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
-              className="group relative block aspect-[16/8] overflow-hidden rounded-3xl border border-border">
-              <img src={work} alt="" loading="lazy" width={1600} height={912} className={`h-full w-full object-cover ${p.pos} transition duration-1000 group-hover:scale-110`} />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
-              <div className="absolute left-1/2 top-1/2 grid h-20 w-20 -translate-x-1/2 -translate-y-1/2 scale-75 place-items-center rounded-full bg-primary text-primary-foreground opacity-0 shadow-glow transition duration-500 group-hover:scale-100 group-hover:opacity-100">
-                <Play className="h-7 w-7 fill-current" />
-              </div>
-              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-6 sm:p-10">
-                <div>
-                  <span className="mb-2 inline-block rounded-full glass px-3 py-1 text-xs">{p.cat} · 2026</span>
-                  <h3 className="text-2xl font-semibold sm:text-4xl">{t(`اسم المشروع ${p.n}`, `Project name ${p.n}`)}</h3>
-                  <p className="text-sm text-muted-foreground">{t("اسم العميل", "Client name")}</p>
+        <div className="mt-14 grid gap-6">
+          {projects.map((p, i) => (
+            <motion.div key={p.id} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+              <Link to="/work" className="group relative block aspect-[16/8] overflow-hidden rounded-3xl border border-border">
+                <img src={p.img} alt={t(p.ar, p.en)} loading="lazy" width={1600} height={912} className="h-full w-full object-cover transition duration-1000 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+                <div className="absolute left-1/2 top-1/2 grid h-20 w-20 -translate-x-1/2 -translate-y-1/2 scale-75 place-items-center rounded-full bg-primary text-primary-foreground opacity-0 shadow-glow transition duration-500 group-hover:scale-100 group-hover:opacity-100">
+                  <Play className="h-7 w-7 fill-current" />
                 </div>
-                <span className="font-display text-5xl text-foreground/20 sm:text-7xl">0{p.n}</span>
-              </div>
-            </motion.a>
+                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-6 sm:p-10">
+                  <div>
+                    <span className="mb-2 inline-block rounded-full glass px-3 py-1 text-xs">{p.cat} · {p.year}</span>
+                    <h3 className="text-2xl font-semibold sm:text-4xl">{t(p.ar, p.en)}</h3>
+                    <p className="text-sm text-muted-foreground">{t(p.clientAr, p.clientEn)}</p>
+                  </div>
+                  <span className="font-display text-5xl text-foreground/20 sm:text-7xl">0{i + 1}</span>
+                </div>
+              </Link>
+            </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
