@@ -1,6 +1,7 @@
 import { AnimatePresence, motion, useScroll, useTransform, useMotionValueEvent, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { ArrowUpLeft, Play } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { ArrowUpLeft, Menu, Play, X } from "lucide-react";
 import hero from "@/assets/hero.jpg";
 import { useLang } from "./i18n";
 import { Magnetic, SplitWords } from "./motion-kit";
@@ -45,7 +46,16 @@ export function Nav() {
   const { t, toggle, lang } = useLang();
   const { scrollY } = useScroll();
   const [small, setSmall] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   useMotionValueEvent(scrollY, "change", (v) => setSmall(v > 60));
+  useEffect(() => {
+    if (!menuOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [menuOpen]);
   const links: [string, string, string][] = [
     ["/#about", "من نحن", "About"],
     ["/#services", "خدماتنا", "Services"],
@@ -59,26 +69,80 @@ export function Nav() {
       transition={{ delay: 1.6, duration: 0.8 }}
       className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4"
     >
-      <nav
-        className={`glass flex w-full max-w-6xl items-center justify-between gap-4 rounded-full px-5 transition-all duration-500 ${small ? "py-2" : "py-3.5"}`}
-      >
-        <a href="/"><Logo /></a>
-        <div className="hidden items-center gap-7 text-sm md:flex">
-          {links.map(([h, a, e]) => (
-            <a key={h} href={h} className="text-muted-foreground transition-colors hover:text-foreground">
-              {t(a, e)}
+      <div className="relative w-full max-w-6xl">
+        <nav
+          aria-label={t("التنقل الرئيسي", "Main navigation")}
+          className={`glass flex w-full items-center justify-between gap-4 rounded-full px-5 transition-all duration-500 ${small ? "py-2" : "py-3.5"}`}
+        >
+          <a href="/" aria-label={t("الصفحة الرئيسية", "Home")}><Logo /></a>
+          <div className="hidden items-center gap-7 text-sm md:flex">
+            {links.map(([h, a, e]) => (
+              <a key={h} href={h} className="text-muted-foreground transition-colors hover:text-foreground">
+                {t(a, e)}
+              </a>
+            ))}
+            <Link to="/work" className="text-muted-foreground transition-colors hover:text-foreground" activeProps={{ className: "text-foreground" }}>
+              {t("الأرشيف", "Archive")}
+            </Link>
+          </div>
+          <div className="flex shrink-0 items-center gap-2">
+            <button onClick={toggle} aria-label={t("التبديل إلى الإنجليزية", "Switch to Arabic")} className="rounded-full border border-border px-3 py-1.5 font-display text-xs hover:border-primary">
+              {lang === "ar" ? "EN" : "ع"}
+            </button>
+            <a href="/#contact" className="hidden rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:bg-accent hover:text-accent-foreground sm:inline-block">
+              {t("ابدأ مشروعك", "Start a project")}
             </a>
-          ))}
-        </div>
-        <div className="flex shrink-0 items-center gap-2">
-          <button onClick={toggle} className="rounded-full border border-border px-3 py-1.5 font-display text-xs hover:border-primary">
-            {lang === "ar" ? "EN" : "ع"}
-          </button>
-          <a href="/#contact" className="hidden rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:bg-accent hover:text-accent-foreground sm:inline-block">
-            {t("ابدأ مشروعك", "Start a project")}
-          </a>
-        </div>
-      </nav>
+            <button
+              type="button"
+              onClick={() => setMenuOpen((open) => !open)}
+              aria-label={menuOpen ? t("إغلاق القائمة", "Close menu") : t("فتح القائمة", "Open menu")}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-navigation"
+              className="grid h-9 w-9 place-items-center rounded-full border border-border transition hover:border-primary md:hidden"
+            >
+              {menuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+            </button>
+          </div>
+        </nav>
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              id="mobile-navigation"
+              initial={{ opacity: 0, y: -10, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.98 }}
+              transition={{ duration: 0.2 }}
+              className="absolute inset-x-0 top-full mt-2 flex flex-col gap-1 rounded-3xl border border-border bg-popover p-3 shadow-sheet md:hidden"
+            >
+              {links.map(([h, a, e]) => (
+                <a
+                  key={h}
+                  href={h}
+                  onClick={() => setMenuOpen(false)}
+                  className="rounded-2xl px-4 py-3 text-sm text-muted-foreground transition hover:bg-primary/10 hover:text-foreground"
+                >
+                  {t(a, e)}
+                </a>
+              ))}
+              <Link
+                to="/work"
+                onClick={() => setMenuOpen(false)}
+                className="rounded-2xl px-4 py-3 text-sm text-muted-foreground transition hover:bg-primary/10 hover:text-foreground"
+                activeProps={{ className: "bg-primary/10 text-foreground" }}
+              >
+                {t("الأرشيف", "Archive")}
+              </Link>
+              <a
+                href="/#contact"
+                onClick={() => setMenuOpen(false)}
+                className="mt-2 rounded-2xl bg-primary px-4 py-3 text-center text-sm font-medium text-primary-foreground transition hover:bg-accent hover:text-accent-foreground"
+              >
+                {t("ابدأ مشروعك", "Start a project")}
+              </a>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </motion.header>
   );
 }
