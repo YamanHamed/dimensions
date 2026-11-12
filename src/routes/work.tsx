@@ -33,7 +33,7 @@ function Archive() {
   const list = works.filter((w) => f === "All" || w.cat === f);
   const idx = list.findIndex((w) => w.id === open);
   const cur = idx >= 0 ? list[idx] : null;
-  const step = (d: number) => cur && setOpen(list[(idx + d + list.length) % list.length].id);
+  const step = (d: number) => cur && setOpen(list[(idx + d + list.length) % list.length]!.id);
 
   useEffect(() => {
     if (!cur) return;

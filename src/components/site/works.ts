@@ -18,9 +18,9 @@ export const works: Artwork[] = Array.from({ length: 12 }, (_, i) => ({
   en: `Artwork ${i + 1}`,
   clientAr: "اسم العميل",
   clientEn: "Client name",
-  cat: cats[i % 6],
+  cat: cats[i % 6]!,
   year: 2026 - (i % 4),
-  img: imgs[i % 6],
+  img: imgs[i % 6]!,
   featured: i < 3,
   tall: i % 6 === 1,
 }));
