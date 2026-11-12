@@ -1,6 +1,7 @@
 import { AnimatePresence, motion, useScroll, useTransform, useMotionValueEvent, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { ArrowUpLeft, Play } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { ArrowUpLeft, Menu, Play, X } from "lucide-react";
 import hero from "@/assets/hero.jpg";
 import { useLang } from "./i18n";
 import { Magnetic, SplitWords } from "./motion-kit";
