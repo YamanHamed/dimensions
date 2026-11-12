@@ -71,7 +71,7 @@ function Archive() {
           ))}
         </div>
 
-        <motion.div layout className="mt-10 grid auto-rows-[220px] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <motion.div layout className="mt-10 grid grid-flow-dense auto-rows-[220px] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
             {list.map((w) => (
               <motion.button
