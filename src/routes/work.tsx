@@ -33,7 +33,7 @@ function Archive() {
   const list = works.filter((w) => f === "All" || w.cat === f);
   const idx = list.findIndex((w) => w.id === open);
   const cur = idx >= 0 ? list[idx] : null;
-  const step = (d: number) => cur && setOpen(list[(idx + d + list.length) % list.length].id);
+  const step = (d: number) => cur && setOpen(list[(idx + d + list.length) % list.length]!.id);
 
   useEffect(() => {
     if (!cur) return;
@@ -71,7 +71,7 @@ function Archive() {
           ))}
         </div>
 
-        <motion.div layout className="mt-10 grid auto-rows-[220px] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <motion.div layout className="mt-10 grid grid-flow-dense auto-rows-[220px] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
             {list.map((w) => (
               <motion.button
