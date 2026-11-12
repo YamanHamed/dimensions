@@ -90,11 +90,10 @@ export function Hero() {
   const [vh, setVh] = useState(800);
   useEffect(() => setVh(window.innerHeight), []);
   const reduce = useReducedMotion();
-  const scale = useTransform(scrollY, [0, vh], reduce ? [1, 1] : [1, 0.92]);
   const fade = useTransform(scrollY, [0, vh * 0.7], [1, 0]);
   const dark = useTransform(scrollY, [0, vh], reduce ? [0, 0] : [0, 0.6]);
   return (
-    <motion.section id="top" ref={ref} style={{ scale }} className="sticky top-0 z-0 flex h-svh items-end overflow-hidden px-5 pb-20 pt-32 sm:px-10">
+    <motion.section id="top" ref={ref} className="sticky top-0 z-0 flex h-svh items-end overflow-hidden px-5 pb-20 pt-32 sm:px-10">
       <motion.img
         src={hero}
         alt=""
