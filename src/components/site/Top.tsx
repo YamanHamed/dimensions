@@ -112,7 +112,7 @@ export function Nav() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.98 }}
               transition={{ duration: 0.2 }}
-              className="glass absolute inset-x-0 top-full mt-2 flex flex-col gap-1 rounded-3xl p-3 md:hidden"
+              className="absolute inset-x-0 top-full mt-2 flex flex-col gap-1 rounded-3xl border border-border bg-popover p-3 shadow-sheet md:hidden"
             >
               {links.map(([h, a, e]) => (
                 <a
