@@ -4,6 +4,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUpLeft, Menu, Play, X } from "lucide-react";
 import hero from "@/assets/hero.jpg";
 import { useLang } from "./i18n";
+import { OrbitLogo } from "./OrbitLogo";
 import { Magnetic, SplitWords } from "./motion-kit";
 
 function Logo() {
@@ -29,12 +30,8 @@ export function Intro() {
           exit={{ clipPath: "inset(0 0 100% 0)" }}
           transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
         >
-          <motion.div initial={{ scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.7 }}>
-            <motion.div
-              className="h-24 w-24 rounded-full bg-gradient-brand shadow-glow"
-              animate={{ rotate: 360, borderRadius: ["50%", "30%", "50%"] }}
-              transition={{ duration: 1.4, ease: "easeInOut" }}
-            />
+          <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.5 }}>
+            <OrbitLogo className="h-40 w-auto drop-shadow-[0_0_30px_var(--primary)]" />
           </motion.div>
         </motion.div>
       )}
