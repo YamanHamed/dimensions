@@ -16,22 +16,46 @@ function Logo() {
   );
 }
 
+// The mark is the "D"; the rest of the name letters in beside it once the draw ends.
+const WORD = "IMENSIONS";
+
 export function Intro() {
   const [show, setShow] = useState(true);
+  const reduce = useReducedMotion();
   useEffect(() => {
-    const id = setTimeout(() => setShow(false), 1800);
+    const id = setTimeout(() => setShow(false), 2700);
     return () => clearTimeout(id);
   }, []);
   return (
     <AnimatePresence>
       {show && (
         <motion.div
-          className="fixed inset-0 z-[100] grid place-items-center bg-background"
+          className="fixed inset-0 z-[100] grid place-items-center bg-background px-6"
           exit={{ clipPath: "inset(0 0 100% 0)" }}
           transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
         >
-          <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.5 }}>
-            <OrbitLogo className="h-40 w-auto drop-shadow-[0_0_30px_var(--primary)]" />
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            dir="ltr"
+            aria-hidden="true"
+            className="flex items-center justify-center gap-[0.1em] text-[clamp(2.4rem,10.5vw,8.5rem)]"
+          >
+            <OrbitLogo className="h-[1em] w-auto drop-shadow-[0_0_30px_var(--primary)]" />
+            <span className="flex font-display font-bold leading-none tracking-tight text-foreground">
+              {WORD.split("").map((ch, i) => (
+                <motion.span
+                  key={i}
+                  initial={reduce ? false : { opacity: 0, y: "0.3em" }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.05 + i * 0.055, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  className="inline-block"
+                >
+                  {ch}
+                </motion.span>
+              ))}
+            </span>
           </motion.div>
         </motion.div>
       )}

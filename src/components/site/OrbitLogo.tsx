@@ -17,7 +17,7 @@ export function OrbitLogo({ className = "" }: { className?: string }) {
     transition: { duration: 0.7, delay, ease: [0.65, 0, 0.35, 1] as const },
   });
   return (
-    <svg viewBox="0 0 340 400" role="img" aria-label="Dimensions logo" className={className}>
+    <svg viewBox="0 -5 320 400" role="img" aria-label="Dimensions logo" className={className}>
       <g fill="none" strokeWidth="14" strokeLinecap="round" strokeLinejoin="round" className="stroke-primary">
         <motion.path {...draw(0)} d="M75 62 H150 C235 62 297 120 297 198 C297 280 235 335 150 335 H75 Q45 335 45 305 V92 Q45 62 75 62 Z" />
         <motion.ellipse {...draw(0.2)} cx="175" cy="195" rx="150" ry="59.6" transform="translate(-15 20) rotate(-45 175 195)" />
