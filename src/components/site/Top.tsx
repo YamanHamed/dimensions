@@ -19,7 +19,7 @@ function Logo() {
 export function Intro() {
   const [show, setShow] = useState(true);
   useEffect(() => {
-    const id = setTimeout(() => setShow(false), 1500);
+    const id = setTimeout(() => setShow(false), 1800);
     return () => clearTimeout(id);
   }, []);
   return (
