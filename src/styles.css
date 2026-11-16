@@ -226,3 +226,8 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* Hide the intro before hydration once it has played this visit. */
+.intro-seen .intro-overlay {
+  display: none;
+}
