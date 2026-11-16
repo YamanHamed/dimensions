@@ -240,13 +240,9 @@ export function Hero() {
         key={lang}
       >
         <h1 className="max-w-4xl text-[clamp(3rem,10vw,8.5rem)] font-bold leading-[0.95] tracking-tight">
-          <SplitWords text={t("نصنع الفكرة", "We create the idea")} delay={1.6} />
+          <SplitWords text={t("نصنع الفكرة", "revive")} delay={1.6} />
           <br />
-          <SplitWords
-            text={t("ونحرّكها.", "& set it in motion.")}
-            delay={1.85}
-            className="text-gradient"
-          />
+          <SplitWords text={t("ونحرّكها.", "your ideas")} delay={1.85} className="text-gradient" />
         </h1>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -276,7 +272,7 @@ export function Hero() {
                 className="inline-flex items-center gap-2 rounded-full glass px-7 py-4 font-medium transition hover:border-primary"
               >
                 <Play className="h-4 w-4 fill-current" />
-                {t("شاهد أعمالنا", "Watch showreel")}
+                {t("شاهد أعمالنا", "our work")}
               </a>
             </Magnetic>
           </div>
