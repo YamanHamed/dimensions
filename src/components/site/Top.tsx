@@ -27,6 +27,11 @@ export function Logo() {
 }
 // Intro plays once per visit: remembered in-memory for client navigation and in sessionStorage for reloads.
 let introPlayed = false;
+// True when the intro already ran earlier this visit, so page content should appear without waiting for it.
+const introSeen = () =>
+  typeof window !== "undefined" && !!sessionStorage.getItem("dimensions-intro") && introPlayed;
+const introDelay = (d: number) => (introSeen() && !introFresh ? 0 : d);
+let introFresh = false;
 export function Intro() {
   const [show, setShow] = useState(!introPlayed);
   const reduce = useReducedMotion();
@@ -37,6 +42,7 @@ export function Intro() {
       return;
     }
     introPlayed = true;
+    introFresh = true;
     sessionStorage.setItem("dimensions-intro", "1");
     const id = setTimeout(() => setShow(false), 2700);
     return () => clearTimeout(id);
@@ -45,7 +51,7 @@ export function Intro() {
     <AnimatePresence>
       {show && (
         <motion.div
-          className="fixed inset-0 z-[100] grid place-items-center bg-background px-6"
+          className="intro-overlay fixed inset-0 z-[100] grid place-items-center bg-background px-6"
           exit={{ clipPath: "inset(0 0 100% 0)" }}
           transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
         >
@@ -123,7 +129,7 @@ export function Nav() {
     <motion.header
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ delay: 1.6, duration: 0.8 }}
+      transition={{ delay: introDelay(1.6), duration: 0.8 }}
       className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4"
       dir="ltr"
     >
@@ -249,18 +255,18 @@ export function Hero() {
         key={lang}
       >
         <h1 className="max-w-4xl text-[clamp(3rem,10vw,8.5rem)] font-bold leading-[0.95] tracking-tight">
-          <SplitWords text={t("نصنع الفكرة", "We create the idea")} delay={1.6} />
+          <SplitWords text={t("نصنع الفكرة", "We create the idea")} delay={introDelay(1.6)} />
           <br />
           <SplitWords
             text={t("ونحرّكها.", "& set it in motion.")}
-            delay={1.85}
+            delay={introDelay(1.85)}
             className="text-gradient"
           />
         </h1>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.2, duration: 0.8 }}
+          transition={{ delay: introDelay(2.2), duration: 0.8 }}
           className="mt-10 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between"
         >
           <p className="max-w-md text-lg text-muted-foreground">
