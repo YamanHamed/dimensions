@@ -29,9 +29,8 @@ export function Logo() {
 let introPlayed = false;
 // True when the intro already ran earlier this visit, so page content should appear without waiting for it.
 const introSeen = () =>
-  typeof window !== "undefined" && !!sessionStorage.getItem("dimensions-intro") && introPlayed;
-const introDelay = (d: number) => (introSeen() && !introFresh ? 0 : d);
-let introFresh = false;
+  typeof window !== "undefined" && !!sessionStorage.getItem("dimensions-intro");
+const introDelay = (d: number) => (introSeen() ? 0 : d);
 export function Intro() {
   const [show, setShow] = useState(!introPlayed);
   const reduce = useReducedMotion();
@@ -42,7 +41,6 @@ export function Intro() {
       return;
     }
     introPlayed = true;
-    introFresh = true;
     sessionStorage.setItem("dimensions-intro", "1");
     const id = setTimeout(() => setShow(false), 2700);
     return () => clearTimeout(id);
