@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { LangProvider } from "@/components/site/i18n";
 import { Hero, Intro, Nav } from "@/components/site/Top";
 import {
   About,
@@ -36,7 +35,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <LangProvider>
+    <>
       <div className="grain relative">
         <div className="pointer-events-none fixed inset-0 -z-0 overflow-hidden">
           <div className="animate-float-slow absolute -right-40 top-1/4 h-[40rem] w-[40rem] rounded-full bg-primary/10 blur-3xl" />
@@ -59,6 +58,6 @@ function Index() {
         </main>
         <Footer />
       </div>
-    </LangProvider>
+    </>
   );
 }

@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight, Play, X } from "lucide-react";
-import { LangProvider, useLang } from "@/components/site/i18n";
+import { useLang } from "@/components/site/i18n";
 import { Nav } from "@/components/site/Top";
 import { Footer } from "@/components/site/Sections";
 import { SectionTag, SplitWords } from "@/components/site/motion-kit";
@@ -27,9 +27,9 @@ export const Route = createFileRoute("/work")({
     ],
   }),
   component: () => (
-    <LangProvider>
+    <>
       <Archive />
-    </LangProvider>
+    </>
   ),
 });
 

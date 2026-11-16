@@ -25,10 +25,19 @@ export function Logo() {
     </span>
   );
 }
+// Intro plays once per visit: remembered in-memory for client navigation and in sessionStorage for reloads.
+let introPlayed = false;
 export function Intro() {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(!introPlayed);
   const reduce = useReducedMotion();
   useEffect(() => {
+    if (introPlayed || sessionStorage.getItem("dimensions-intro")) {
+      introPlayed = true;
+      setShow(false);
+      return;
+    }
+    introPlayed = true;
+    sessionStorage.setItem("dimensions-intro", "1");
     const id = setTimeout(() => setShow(false), 2700);
     return () => clearTimeout(id);
   }, []);
