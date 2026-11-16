@@ -127,11 +127,12 @@
 }
 
 html {
+  overflow-x: clip;
   scroll-behavior: smooth;
 }
 body {
   font-family: var(--font-sans);
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 .logo-i {
   position: relative;
@@ -225,4 +226,9 @@ body {
     transition: none !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Hide the intro before hydration once it has played this visit. */
+.intro-seen .intro-overlay {
+  display: none;
 }

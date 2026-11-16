@@ -11,6 +11,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import { LangProvider } from "@/components/site/i18n";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -106,9 +107,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="ar" dir="rtl" className="dark">
+    <html lang="ar" dir="rtl" className="dark" suppressHydrationWarning>
       <head>
         <HeadContent />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(sessionStorage.getItem("dimensions-intro"))document.documentElement.classList.add("intro-seen")}catch(e){}`,
+          }}
+        />
       </head>
       <body>
         {children}
@@ -124,7 +130,9 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <LangProvider>
+        <Outlet />
+      </LangProvider>
     </QueryClientProvider>
   );
 }
