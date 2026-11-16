@@ -3,7 +3,15 @@ import { useEffect, useRef, useState, type ReactNode, type MouseEvent } from "re
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-export function Reveal({ children, delay = 0, className }: { children: ReactNode; delay?: number; className?: string }) {
+export function Reveal({
+  children,
+  delay = 0,
+  className,
+}: {
+  children: ReactNode;
+  delay?: number;
+  className?: string;
+}) {
   return (
     <motion.div
       className={className}
@@ -17,7 +25,15 @@ export function Reveal({ children, delay = 0, className }: { children: ReactNode
   );
 }
 
-export function SplitWords({ text, className, delay = 0 }: { text: string; className?: string; delay?: number }) {
+export function SplitWords({
+  text,
+  className,
+  delay = 0,
+}: {
+  text: string;
+  className?: string;
+  delay?: number;
+}) {
   return (
     <motion.span
       initial="hidden"
@@ -66,7 +82,12 @@ export function Magnetic({ children, className }: { children: ReactNode; classNa
     y.set((e.clientY - r.top - r.height / 2) * 0.3);
   };
   return (
-    <motion.div style={{ x, y }} onMouseMove={move} onMouseLeave={() => (x.set(0), y.set(0))} className={className}>
+    <motion.div
+      style={{ x, y }}
+      onMouseMove={move}
+      onMouseLeave={() => (x.set(0), y.set(0))}
+      className={className}
+    >
       {children}
     </motion.div>
   );

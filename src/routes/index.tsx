@@ -1,15 +1,32 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LangProvider } from "@/components/site/i18n";
 import { Hero, Intro, Nav } from "@/components/site/Top";
-import { About, Clients, Contact, Footer, Founder, How, Services, Studios, Work } from "@/components/site/Sections";
+import {
+  About,
+  Clients,
+  Contact,
+  Footer,
+  Founder,
+  How,
+  Services,
+  Studios,
+  Work,
+} from "@/components/site/Sections";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "أبعاد | Dimensions Animation Studio" },
-      { name: "description", content: "استوديو سعودي للرسوم المتحركة 2D و3D والإعلان والتصميم — Saudi 2D & 3D animation studio." },
+      {
+        name: "description",
+        content:
+          "استوديو سعودي للرسوم المتحركة 2D و3D والإعلان والتصميم — Saudi 2D & 3D animation studio.",
+      },
       { property: "og:title", content: "أبعاد | Dimensions Animation Studio" },
-      { property: "og:description", content: "Saudi 2D & 3D animation, advertising and design studio." },
+      {
+        property: "og:description",
+        content: "Saudi 2D & 3D animation, advertising and design studio.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -31,13 +48,13 @@ function Index() {
           <Hero />
           <div className="relative z-10 rounded-t-[2.5rem] bg-background shadow-sheet">
             <About />
-          <Founder />
-          <How />
-          <Services />
-          <Work />
-          <Studios />
-          <Clients />
-          <Contact />
+            <Founder />
+            <How />
+            <Services />
+            <Work />
+            <Studios />
+            <Clients />
+            <Contact />
           </div>
         </main>
         <Footer />

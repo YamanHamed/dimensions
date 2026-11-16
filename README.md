@@ -1,6 +1,6 @@
 # Modern Design Studio
 
-I made this website with Claude , but it lacks art direction and modern design 
+I made this website with Claude , but it lacks art direction and modern design
 I want you to design it again with the modern design components and animations
 
 This project was built with [Lovable](https://lovable.dev).
