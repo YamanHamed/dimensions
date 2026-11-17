@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import avatarWebm from "@/assets/ali-avatar.webm";
-import avatarStacked from "@/assets/ali-avatar-stacked.mp4";
+import avatarStacked from "@/assets/avatar-stacked.mp4";
 
 const frameClass = "absolute left-1/2 top-0 h-64 w-[160%] max-w-none -translate-x-[50%]";
 
