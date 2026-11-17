@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import avatarWebm from "@/assets/ali-avatar.webm";
-// import avatarStacked from "@/assets/ali-avatar-stacked.mp4";
+import avatarStacked from "@/assets/ali-avatar-stacked.mp4";
 
 const frameClass = "absolute left-1/2 top-0 h-64 w-[160%] max-w-none -translate-x-[50%]";
 
@@ -18,22 +18,22 @@ const maskStyle: CSSProperties = {
 };
 
 export function AvatarVideo() {
-  // const [safari, setSafari] = useState(false);
+  const [safari, setSafari] = useState(false);
 
   // useEffect(() => {
   //   setSafari(/^((?!chrome|android).)*safari/i.test(navigator.userAgent));
   // }, []);
 
-  // useEffect(() => {
-  //   const ua = navigator.userAgent;
-  //   const ios =
-  //     /iPad|iPhone|iPod/.test(ua) ||
-  //     (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  //   const forced = new URLSearchParams(window.location.search).has("stacked");
-  //   setSafari(forced || ios || /^((?!chrome|android).)*safari/i.test(ua));
-  // }, []);
+  useEffect(() => {
+    const ua = navigator.userAgent;
+    const ios =
+      /iPad|iPhone|iPod/.test(ua) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    const forced = new URLSearchParams(window.location.search).has("stacked");
+    setSafari(forced || ios || /^((?!chrome|android).)*safari/i.test(ua));
+  }, []);
 
-  // if (safari) return <StackedAlphaVideo src={avatarStacked} />;
+  if (safari) return <StackedAlphaVideo src={avatarStacked} />;
 
   return (
     <video
