@@ -171,9 +171,9 @@ export function Founder() {
         </Reveal>
 
         <div>
-          <SectionTag n="02" label={t("المؤسس", "Founder")} />
+          <SectionTag n="02" label={t("المؤسس", "Founder and CEO")} />
           <h2 className="text-[clamp(2.2rem,5vw,4rem)] font-bold leading-tight">
-            <SplitWords text={t("علي بن سعيد البياهي", "Ali Al Byahi")} />
+            <SplitWords text={t("علي بن سعيد البياهي", "Ali Al-Byahi")} />
           </h2>
           <Reveal delay={0.2}>
             <p className="mt-6 max-w-xl text-lg text-muted-foreground">
