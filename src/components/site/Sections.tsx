@@ -166,7 +166,7 @@ export function Founder() {
             >
               <source src={avatarVideo} type="video/webm" />
             </video> */}
-            <AvatarVideo className="h-full w-full object-contain" />
+            <AvatarVideo />
           </div>
         </Reveal>
 

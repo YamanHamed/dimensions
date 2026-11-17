@@ -13,7 +13,9 @@ import logo from "@/assets/logo.webp";
 import { useLang } from "./i18n";
 import { OrbitLogo } from "./OrbitLogo";
 import { Magnetic, SplitWords } from "./motion-kit";
-import heroVideo from "@/assets/showreel-desktop.mp4";
+import heroVideo1 from "@/assets/hero.mp4";
+import heroVideo2 from "@/assets/showreel-desktop.webm";
+import BgVideo from "./BgVideo";
 
 // The mark is the "D"; the rest of the name letters in beside it once the draw ends.
 const WORD = "imensions";
@@ -242,9 +244,11 @@ export function Hero() {
       ref={ref}
       className="sticky top-0 z-0 flex h-svh items-end overflow-hidden px-5 pb-20 pt-32 sm:px-10"
     >
-      <video autoPlay muted loop className="absolute inset-0 h-full w-full object-cover">
-        <source src={heroVideo} type="video/mp4" />
-      </video>
+      <BgVideo
+        className="absolute inset-0 h-full w-full object-cover"
+        mp4={heroVideo1}
+        webm={heroVideo2}
+      />
 
       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
       <motion.div
